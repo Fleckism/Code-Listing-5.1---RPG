@@ -1,5 +1,14 @@
 // game.cpp
-
+/*
+Multiple Enemies
+Items
+Store 566 pg182
+Random encounters during rest
+Magic points 564 pg 181
+Modify leveling up so that wizards get more mana and warriors get more strength
+Add character race that gives statistical boost
+Add gold to game
+*/
 #include "Map.h"
 #include "Player.h"
 #include <cstdlib>
