@@ -15,12 +15,13 @@ class Player;
 class Monster
 {
 public:
-	Monster(const std::string& name, int hp, int acc,
+	Monster(int gold_reward, const std::string& name, int hp, int acc,
 		int xpReward, int armor, const std::string& weaponName,
 		int lowDamage, int highDamage);
 
 	bool isDead();
-
+	int			get_goldreward();
+	// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 	int         getXPReward();
 	std::string getName();
 	int         getArmor();
@@ -30,6 +31,8 @@ public:
 	void displayHitPoints();
 
 private:
+	int			mGold_reward;
+	//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 	std::string mName;
 	int         mHitPoints;
 	int         mAccuracy;

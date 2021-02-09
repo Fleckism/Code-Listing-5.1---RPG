@@ -25,9 +25,11 @@ public:
 	void levelUp();
 	void rest();
 	void viewStats();
-	void victory(int xp);
+	void victory(int xp,int gold);
 	void gameover();
 	void displayHitPoints();
+	//int	 gold_display();
+	// ^^^^^^^^^^^^^^^
  
 private:
 	// Data members.
@@ -41,6 +43,8 @@ private:
 	int         mLevel;
 	int         mArmor;
 	Weapon      mWeapon;
+	int			mGold;
+	//^^^^^^^^^^
 };
 
 #endif //PLAYER_H

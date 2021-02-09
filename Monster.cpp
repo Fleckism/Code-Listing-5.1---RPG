@@ -7,10 +7,12 @@
 #include "Random.h"
 using namespace std;
 
-Monster::Monster(const std::string& name, int hp, int acc,
+Monster::Monster(int gold_reward, const std::string& name, int hp, int acc,
 		int xpReward, int armor, const std::string& weaponName,
 		int lowDamage, int highDamage)
 {
+	mGold_reward = gold_reward;
+	// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 	mName      = name;
 	mHitPoints = hp;
 	mAccuracy  = acc;
@@ -18,9 +20,13 @@ Monster::Monster(const std::string& name, int hp, int acc,
 	mArmor     = armor;
 	mWeapon.mName = weaponName;
 	mWeapon.mDamageRange.mLow  = lowDamage;
-	mWeapon.mDamageRange.mHigh = highDamage;
+	mWeapon.mDamageRange.mHigh = highDamage; 
 }
-
+int Monster::get_goldreward()
+{
+	return mGold_reward;
+}
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 bool Monster::isDead()
 {
 	return mHitPoints <= 0;

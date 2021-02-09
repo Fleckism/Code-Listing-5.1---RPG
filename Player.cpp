@@ -17,9 +17,11 @@ Player::Player()
 	mNextLevelExp = 0;
 	mLevel        = 0;
 	mArmor        = 0;
+	mGold		  = 0;
 	mWeapon.mName = "Default Weapon Name";
 	mWeapon.mDamageRange.mLow  = 0;
 	mWeapon.mDamageRange.mHigh = 0;
+	// ^^^^^^^^^
 }
 
 bool Player::isDead()
@@ -47,10 +49,10 @@ void Player::createClass()
 	getline(cin, mName);
 
 	// Character selection.
-	cout << "Please select a character class number..."<< endl;	
+	cout << "\nPlease select a character class number..."<< endl;	
 	cout << "1)Fighter 2)Wizard 3)Cleric 4)Thief : ";	
 
-	int characterNum = 1;	
+	int characterNum = 0;	
 	cin >> characterNum;
 
 	switch( characterNum )
@@ -64,10 +66,13 @@ void Player::createClass()
 		mNextLevelExp = 1000;
 		mLevel        = 1;
 		mArmor        = 4;
+		mGold		  = 0;
 		mWeapon.mName = "Long Sword";
 		mWeapon.mDamageRange.mLow  = 1;
 		mWeapon.mDamageRange.mHigh = 8;
+		// ^^^^^^^^^
 		break;
+
 	case 2:  // Wizard
 		mClassName    = "Wizard";
 		mAccuracy     = 5;
@@ -77,10 +82,13 @@ void Player::createClass()
 		mNextLevelExp = 1000;
 		mLevel        = 1;
 		mArmor        = 1;
+		mGold		  = 0;
 		mWeapon.mName = "Staff";
 		mWeapon.mDamageRange.mLow  = 1;
 		mWeapon.mDamageRange.mHigh = 4;
+		// ^^^^^^^^^
 		break;
+
 	case 3:  // Cleric
 		mClassName    = "Cleric";
 		mAccuracy     = 8;
@@ -90,10 +98,13 @@ void Player::createClass()
 		mNextLevelExp = 1000;
 		mLevel        = 1;
 		mArmor        = 3;
+		mGold		  = 0;
 		mWeapon.mName = "Flail";
 		mWeapon.mDamageRange.mLow  = 1;
 		mWeapon.mDamageRange.mHigh = 6;
+		// ^^^^^^^^^
 		break;
+
 	default: // Thief
 		mClassName    = "Thief";
 		mAccuracy     = 7;
@@ -103,11 +114,45 @@ void Player::createClass()
 		mNextLevelExp = 1000;
 		mLevel        = 1;
 		mArmor        = 2;
+		mGold		  = 0;
 		mWeapon.mName = "Short Sword";
 		mWeapon.mDamageRange.mLow  = 1;
 		mWeapon.mDamageRange.mHigh = 6;
+		// ^^^^^^^^^
 		break;
 	}
+	// Race selection.
+	cout << "\nPlease select a character race number..." << endl;
+	cout << "1)Human 2)Elf  3)Dwarf  4) Halfling : ";
+	//cout << "1)++mMaxHitPoints ++mArmor 
+	// 2)++Accuracy ++m_Mana 3)1/2 mNextLevelExp 4)++mAccuracy ++mWeapon.mDamage...mHigh";	
+
+	int race_num = 0;
+	cin >> race_num;
+
+	switch (race_num)
+	{
+	case 1:  // Human
+		mMaxHitPoints = 25;
+		mArmor = 8;
+		break;
+
+	case 2:  // Elf
+		mAccuracy = 10;
+		//m_mana = 20; // These numbers should be higher than the character class attributes
+			break;
+
+	case 3:  // Dwarf
+		mNextLevelExp = 500;
+		break;
+
+	default: // Halfing
+		mAccuracy = 14;
+		mWeapon.mDamageRange.mHigh = 12;
+		break;
+	}
+
+
 }
 
 bool Player::attack(Monster& monster)
@@ -170,7 +215,12 @@ bool Player::attack(Monster& monster)
 
 	return false;
 }
- 
+/*int Player::gold_display()
+{
+	return mGold += mGold_reward;
+}
+*/
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 void Player::levelUp()
 {
 	if( mExpPoints >= mNextLevelExp )
@@ -209,6 +259,7 @@ void Player::viewStats()
 	cout << "============" << endl;
 	cout << endl;
 
+	cout << "Player gold	 = " << mGold		  << endl;
 	cout << "Name            = " << mName         << endl;
 	cout << "Class           = " << mClassName    << endl;
 	cout << "Accuracy        = " << mAccuracy     << endl;
@@ -228,13 +279,18 @@ void Player::viewStats()
 	cout << endl;
 }
 
-void Player::victory(int xp)
+void Player::victory(int xp, int gold)
 {
+	system("CLS"); // ********************************* clears screen 
 	cout << "You won the battle!" << endl;
-	cout << "You win " << xp 
-		<< " experience points!" << endl << endl;
+	cout << "You win " << xp
+		<< " experience points!" << endl;
+
+	cout << "You win " << gold << " gold!" << endl << endl;
 
 	mExpPoints += xp;
+
+	mGold += gold;
 }
 
 void Player::gameover()
